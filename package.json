@@ -1,0 +1,23 @@
+{
+  "name": "proper-attribution",
+  "version": "1.0.0",
+  "description": "Give a proper attribution to the authors of the packages you use",
+  "author": {
+    "name": "Benjamin DIDIER",
+    "url": "https://github.com/Aziks0"
+  },
+  "license": "GPL-3.0-or-later",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node ./src/index.ts",
+    "format": "prettier --write ./src/**/*",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "husky": "^7.0.4",
+    "prettier": "^2.6.1",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}
