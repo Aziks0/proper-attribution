@@ -1,4 +1,5 @@
 import validatePath from './validate';
+import { getDevDependencies } from './analyse-package';
 
 interface MainOptions {
   output: string;
@@ -8,6 +9,10 @@ interface MainOptions {
 
 const main = (options: MainOptions) => {
   validatePath(options.output, options.packageJson);
+
+  let excludedDependencies: string[] | null = null;
+  if (options.excludeDev)
+    excludedDependencies = getDevDependencies(options.packageJson);
 };
 
 export default main;
