@@ -31,6 +31,8 @@ const startAnalyse = (
     }
 
     const infos = getPackageInfos(path);
+    if (!infos) return;
+
     writer.write(infos);
   };
 

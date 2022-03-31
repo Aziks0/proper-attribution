@@ -81,6 +81,10 @@ const getPackageInfos = (path: string) => {
   const packageJsonBuffer = fs.readFileSync(path);
   const packageJson: PackageJson = JSON.parse(packageJsonBuffer.toString());
 
+  // `name` is required in npm package.json, so if `name` is undefined, the
+  // current file is then not in a npm package, and we can skip it
+  if (!packageJson.name) return;
+
   // Title
   let markdownText = md.toHeader(
     packageJson.name + '@' + packageJson.version,
