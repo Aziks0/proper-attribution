@@ -6,8 +6,8 @@
     "name": "Benjamin DIDIER",
     "url": "https://github.com/Aziks0"
   },
-  "license": "GPL-3.0-or-later",
   "main": "index.ts",
+  "license": "MIT",
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "format": "prettier --write ./src/**/*",
