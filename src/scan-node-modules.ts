@@ -5,8 +5,8 @@ import { logError } from './utils/logging';
 
 const scanNodeModules = (
   rootDirPath: string,
-  onFileCallback: WalkEventListener,
-  onEndCallback: () => void
+  onFileCallback?: WalkEventListener,
+  onEndCallback?: () => void
 ) => {
   const nodeModulesPath = p.join(rootDirPath, 'node_modules');
   if (!fs.existsSync(nodeModulesPath)) {
@@ -18,8 +18,8 @@ const scanNodeModules = (
   }
 
   const walker = walkdir(nodeModulesPath);
-  walker.on('file', onFileCallback);
-  walker.on('end', onEndCallback);
+  if (onFileCallback) walker.on('file', onFileCallback);
+  if (onEndCallback) walker.on('end', onEndCallback);
 };
 
 export default scanNodeModules;
