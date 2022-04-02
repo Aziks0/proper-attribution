@@ -5,6 +5,18 @@ import * as p from 'path';
 import fs from 'fs';
 import { WalkEventListener } from 'walkdir';
 
+/**
+ * Analyse recursively a `node_modules` folder, looking for `package.json`
+ * files. For every valid `package.json` file, some information will be taken
+ * and written into the `outputFile`. This information will be formatted as a
+ * markdown text.
+ *
+ * @param rootDirPath The directory root path. Should be the one that contains
+ * the `node_modules` folder.
+ * @param outputFile The path to the file containing the information
+ * @param excludedDependencies An array of the excluded dependencies names
+ * @see {@link getPackageInfos}
+ */
 const startAnalyse = (
   rootDirPath: string,
   outputFile: string,
@@ -17,6 +29,7 @@ const startAnalyse = (
     this.ignore(path);
   };
 
+  /** Write the packages information to the output file */
   const writeNotice: WalkEventListener = (path: string) => {
     const filename = p.basename(path);
     if (filename !== 'package.json') return;

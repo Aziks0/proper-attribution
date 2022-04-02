@@ -21,11 +21,24 @@ interface PackageJson {
   devDependencies?: TDependencies;
 }
 
+/**
+ * Get the content of a `package.json` file
+ *
+ * @param path The path to the `package.json` file
+ * @returns A `package.json` as an object
+ */
 const getPackageJsonContent = (path: string): PackageJson => {
   const packageJsonBuffer = fs.readFileSync(path);
   return JSON.parse(packageJsonBuffer.toString());
 };
 
+/**
+ * Get the dev dependencies names of a `package.json` file
+ *
+ * @param path The path to the `package.json` file
+ * @returns An array containing the dev dependencies names from the
+ * `package.json` file, or `null` if there are none
+ */
 const getDevDependencies = (path: string) => {
   const packageJson = getPackageJsonContent(path);
 
@@ -35,6 +48,13 @@ const getDevDependencies = (path: string) => {
   return null;
 };
 
+/**
+ * Format a person's information from a `package.json` file to
+ * `{NAME} <{EMAIL}> ({URL})`
+ *
+ * @param people A person's information from a `package.json` file
+ * @returns The formatted information of the person
+ */
 const formatPeople = (people: TPeople) => {
   // `<` needs to be escaped to avoid GitHub removing it
   if (typeof people === 'string') return people.replace('<', '\\<');
@@ -46,10 +66,24 @@ const formatPeople = (people: TPeople) => {
   return people_;
 };
 
+/**
+ * Format a list of persons from a `package.json` file
+ *
+ * @param contributors An array of persons information from a `package.json`
+ * file
+ * @returns An array of the formatted information of the persons
+ * @see {@link formatPeople}
+ */
 const formatContributors = (contributors: TContributors) => {
   return contributors.map((contributor) => formatPeople(contributor));
 };
 
+/**
+ * Get a repository url from a `package.json` file
+ *
+ * @param repository
+ * @returns The repository url
+ */
 const getRepository = (repository: TRepository) => {
   return typeof repository === 'string' ? repository : repository.url;
 };
@@ -68,6 +102,12 @@ const formatLine = (key: string, value: string) => {
   );
 };
 
+/**
+ * Get the filename of a license file (`license`|`licence`)
+ *
+ * @param path The path to the directory containing the license file
+ * @returns The filename of the license file, or undefined if none are found
+ */
 const getLicenseFilename = (path: string) => {
   const files = fs.readdirSync(path);
   return files.find((file) => {
@@ -77,6 +117,25 @@ const getLicenseFilename = (path: string) => {
   });
 };
 
+/**
+ * Get the information from a `package.json` file, and format it as a markdown
+ * text.
+ *
+ * The information taken are:
+ * - name
+ * - version
+ * - homepage url
+ * - repository url
+ * - author
+ * - contributors
+ * - license type
+ * - copy of the license and copyright notice
+ *
+ * Check the code for more details on the formatting.
+ *
+ * @param path The path to the `package.json` file
+ * @returns The information formatted as a markdown text
+ */
 const getPackageInfos = (path: string) => {
   const packageJsonBuffer = fs.readFileSync(path);
   const packageJson: PackageJson = JSON.parse(packageJsonBuffer.toString());
