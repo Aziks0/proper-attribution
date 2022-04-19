@@ -31,7 +31,8 @@
     "attribution": "git-authors --ignore-pattern \"Benjamin DIDIER\" && pnpm prune && pnpm start"
   },
   "files": [
-    "dist"
+    "dist",
+    "NOTICE.md"
   ],
   "devDependencies": {
     "@types/node": "^17.0.23",
