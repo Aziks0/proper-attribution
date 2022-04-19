@@ -6,16 +6,38 @@
     "name": "Benjamin DIDIER",
     "url": "https://github.com/Aziks0"
   },
-  "main": "index.ts",
+  "homepage": "https://github.com/Aziks0/proper-attribution",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Aziks0/proper-attribution.git"
+  },
   "license": "MIT",
+  "keywords": [
+    "attribution",
+    "copyright",
+    "license",
+    "notice"
+  ],
+  "main": "dist/index.js",
+  "bin": {
+    "proper-attribution": "dist/index.js",
+    "attribute": "dist/index.js"
+  },
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "format": "prettier --write ./src/**/*",
-    "prepare": "husky install"
+    "build": "tsc",
+    "prepare": "husky install",
+    "attribution": "git-authors --ignore-pattern \"Benjamin DIDIER\" && pnpm prune && pnpm start"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/node": "^17.0.23",
+    "git-authors-cli": "^1.0.39",
     "husky": "^7.0.4",
+    "ls-engines": "^0.6.5",
     "prettier": "^2.6.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
