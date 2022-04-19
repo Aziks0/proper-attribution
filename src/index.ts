@@ -39,7 +39,7 @@ program
   .option(
     '-o, --output <path>',
     'change the output filename and directory',
-    'NOTICE' // defaults to `./NOTICE`
+    'NOTICE.md' // defaults to `./NOTICE.md`
   )
   .option(
     '--package-json <path>',
