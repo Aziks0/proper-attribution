@@ -45,5 +45,8 @@
   "dependencies": {
     "commander": "^9.1.0",
     "walkdir": "^0.4.1"
+  },
+  "engines": {
+    "node": "^17 || ^16 || ^15 || ^14 || ^12.20"
   }
 }
