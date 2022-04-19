@@ -90,15 +90,15 @@ const getRepository = (repository: TRepository) => {
 
 /**
  * Format a pair of key/value to the markdown string
- * `**key:** value\n`
+ * `**key:** value \\n`
  *
  * @param key The text key
  * @param value The text value
- * @returns The string `**key:** value\n`
+ * @returns The string `**key:** value \\n`
  */
 const formatLine = (key: string, value: string) => {
   return (
-    md.toEmphasis(key + ':', md.MarkdownEmphasis.BOLD) + ' ' + value + '\n'
+    md.toEmphasis(key + ':', md.MarkdownEmphasis.BOLD) + ' ' + value + ' \\\n'
   );
 };
 
@@ -180,6 +180,11 @@ const getPackageInfos = (path: string) => {
   // License type
   if (packageJson.license)
     markdownText += formatLine('License', packageJson.license);
+
+  // Remove last `\`
+  const lastBackslashIndex = markdownText.lastIndexOf('\\');
+  markdownText = markdownText.slice(0, lastBackslashIndex);
+  markdownText += '\n';
 
   // License text
   const dirname = p.dirname(path);

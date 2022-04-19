@@ -51,9 +51,11 @@ const toList = (
     markdownList = titleBold ? toEmphasis(title, MarkdownEmphasis.BOLD) : title;
 
   for (const item of items) {
+    if (type === MarkdownLists.INDENTED) markdownList += ' \\';
     markdownList += '\n' + type + ' ' + item;
   }
 
+  if (type === MarkdownLists.INDENTED) markdownList += ' \\';
   return markdownList + '\n';
 };
 
