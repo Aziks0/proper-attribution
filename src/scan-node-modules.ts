@@ -5,6 +5,7 @@ import { logError } from './utils/logging';
 
 const scanNodeModules = (
   rootDirPath: string,
+  onPathCallback?: WalkEventListener,
   onFileCallback?: WalkEventListener,
   onEndCallback?: () => void
 ) => {
@@ -18,6 +19,7 @@ const scanNodeModules = (
   }
 
   const walker = walkdir(nodeModulesPath);
+  if (onPathCallback) walker.on('path', onPathCallback);
   if (onFileCallback) walker.on('file', onFileCallback);
   if (onEndCallback) walker.on('end', onEndCallback);
 };
